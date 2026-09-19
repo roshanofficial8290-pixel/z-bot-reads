@@ -1,0 +1,6 @@
+{
+  "name": "Z-Bot Reads",
+  "description": "Telegram Book Bot documentation and conversation flow with start menu, search, paginated results, book details, and source links.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

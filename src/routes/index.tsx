@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-const TITLE = "Telegram Book Bot — Vercel project";
+const TITLE = "Z-Bot Reads";
 const DESC =
-  "A Telegram book search bot: start menu, button navigation, paginated results, book details and source links, built on a pluggable BookProvider.";
+  "Telegram Book Bot documentation and conversation flow with start menu, search, paginated results, book details, and source links.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -40,12 +40,11 @@ function Index() {
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
           Bot project · deploy target: Vercel
         </p>
-        <h1 className="mt-4 font-serif text-5xl font-semibold leading-tight">
-          Telegram Book Bot
-        </h1>
+        <h1 className="mt-4 font-serif text-5xl font-semibold leading-tight">Telegram Book Bot</h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          The bot source lives in your Files as <code className="font-mono text-foreground">telegram-book-bot</code>.
-          This page only documents the flow.
+          The bot source lives in your Files as{" "}
+          <code className="font-mono text-foreground">telegram-book-bot</code>. This page only
+          documents the flow.
         </p>
 
         <section className="mt-12">
@@ -53,7 +52,9 @@ function Index() {
           <ol className="mt-4 divide-y divide-border rounded-md border border-border bg-card">
             {FLOW.map(([step, text], i) => (
               <li key={step} className="flex items-baseline gap-4 px-5 py-3">
-                <span className="font-mono text-sm text-primary">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-mono text-sm text-primary">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 <span className="w-24 shrink-0 font-medium">{step}</span>
                 <span className="text-muted-foreground">{text}</span>
               </li>

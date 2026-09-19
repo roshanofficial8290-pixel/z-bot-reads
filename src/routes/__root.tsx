@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
+import "../lib/patch-fetch";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
@@ -77,11 +78,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Z-Bot Reads" },
+      {
+        name: "description",
+        content:
+          "Telegram Book Bot documentation and conversation flow with start menu, search, paginated results, book details, and source links.",
+      },
+      { name: "author", content: "Z-Bot Reads" },
+      { property: "og:title", content: "Z-Bot Reads" },
+      {
+        property: "og:description",
+        content:
+          "Telegram Book Bot documentation and conversation flow with start menu, search, paginated results, book details, and source links.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
@@ -108,11 +117,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var w=typeof window!=="undefined"?window:globalThis;if(!w)return;w.addEventListener("error",function(e){if(e&&e.message&&(e.message.indexOf("Cannot set property fetch")!==-1||e.message.indexOf("which has only a getter")!==-1)){e.preventDefault();if(e.stopImmediatePropagation)e.stopImmediatePropagation();}},true);var origOnError=w.onerror;w.onerror=function(msg,url,line,col,error){if(typeof msg==="string"&&(msg.indexOf("Cannot set property fetch")!==-1||msg.indexOf("which has only a getter")!==-1)){return true;}if(origOnError)return origOnError.apply(this,arguments);};var currentFetch=w.fetch;var proto=w;while(proto){try{var d=Object.getOwnPropertyDescriptor(proto,"fetch");if(d){var origGet=d.get;var origVal=d.value;Object.defineProperty(proto,"fetch",{get:function(){return currentFetch||(origGet?origGet.call(this):origVal);},set:function(v){currentFetch=v;},configurable:true,enumerable:d.enumerable!==false});}}catch(e){}proto=Object.getPrototypeOf(proto);}try{Object.defineProperty(w,"fetch",{get:function(){return currentFetch;},set:function(v){currentFetch=v;},configurable:true,enumerable:true});}catch(e){}if(w.Window&&w.Window.prototype){try{Object.defineProperty(w.Window.prototype,"fetch",{get:function(){return currentFetch;},set:function(v){currentFetch=v;},configurable:true,enumerable:true});}catch(e){}}}catch(err){}})();`,
+          }}
+        />
         <HeadContent />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         {children}
         <Scripts />
       </body>
