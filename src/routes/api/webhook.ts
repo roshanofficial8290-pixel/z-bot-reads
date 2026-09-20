@@ -10,7 +10,7 @@ export const Route = createFileRoute("/api/webhook")({
         });
       },
       POST: async ({ request }) => {
-        const secret = process.env.TELEGRAM_WEBHOOK_SECRET;
+        const secret = process.env['TELEGRAM_WEBHOOK_SECRET'];
         if (secret) {
           const headerSecret = request.headers.get("x-telegram-bot-api-secret-token");
           if (headerSecret !== secret) {

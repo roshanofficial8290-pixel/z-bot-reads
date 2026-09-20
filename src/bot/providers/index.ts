@@ -6,7 +6,7 @@ export type { Book, BookProvider, BookSource, SearchResult } from "./types";
 
 let cached: BookProvider | undefined;
 
-export function getBookProvider(name = process.env.BOOK_PROVIDER ?? "mock"): BookProvider {
+export function getBookProvider(name = process.env['BOOK_PROVIDER'] ?? "mock"): BookProvider {
   if (cached && cached.name === name) return cached;
 
   switch (name) {
