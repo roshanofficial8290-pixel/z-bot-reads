@@ -58,7 +58,7 @@ export function parseCallback(data: string | undefined): Callback | null {
     const page = Number(parts[2]);
     return {
       kind: "book",
-      id: parts[1],
+      id: parts[1] ?? "",
       page: Number.isFinite(page) ? page : 1,
       query: parts.slice(3).join(SEP),
     };
