@@ -67,10 +67,10 @@ export class ZLibraryProvider implements BookProvider {
   readonly name = "zlibrary";
 
   private readonly mirror: string;
-  private readonly email?: string;
-  private readonly password?: string;
-  private cookie?: string;
-  private loginPromise?: Promise<string>;
+  private readonly email: string | undefined;
+  private readonly password: string | undefined;
+  private cookie: string | undefined;
+  private loginPromise: Promise<string> | undefined;
 
   constructor() {
     const domain = process.env["ZLIBRARY_DOMAIN"] ?? "https://z-library.sk";

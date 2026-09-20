@@ -9,13 +9,13 @@ export interface Book {
   id: string;
   title: string;
   authors: string[];
-  year?: number;
-  language?: string;
+  year?: number | undefined;
+  language?: string | undefined;
   /** e.g. "EPUB", "PDF", "MOBI" */
-  format?: string;
-  fileSizeBytes?: number;
-  description?: string;
-  coverUrl?: string;
+  format?: string | undefined;
+  fileSizeBytes?: number | undefined;
+  description?: string | undefined;
+  coverUrl?: string | undefined;
   sources: BookSource[];
 }
 
