@@ -6,7 +6,14 @@ export type { Book, BookProvider, BookSource, SearchResult } from "./types";
 
 let cached: BookProvider | undefined;
 
-export function getBookProvider(name = process.env['BOOK_PROVIDER'] ?? "mock"): BookProvider {
+/** Real Z-Library is used automatically once credentials are configured. */
+function defaultProviderName(): string {
+  const explicit = process.env["BOOK_PROVIDER"];
+  if (explicit) return explicit;
+  return process.env["ZLIBRARY_EMAIL"] && process.env["ZLIBRARY_PASSWORD"] ? "zlibrary" : "mock";
+}
+
+export function getBookProvider(name = defaultProviderName()): BookProvider {
   if (cached && cached.name === name) return cached;
 
   switch (name) {
