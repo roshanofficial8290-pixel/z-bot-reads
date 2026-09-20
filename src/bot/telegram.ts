@@ -105,7 +105,9 @@ export class TelegramClient {
   }
 
   deleteMessage(chatId: number, messageId: number) {
-    return this.call("deleteMessage", { chat_id: chatId, message_id: messageId }).catch(() => undefined);
+    return this.call("deleteMessage", { chat_id: chatId, message_id: messageId }).catch(
+      () => undefined,
+    );
   }
 
   answerCallbackQuery(id: string, text?: string) {

@@ -1,13 +1,6 @@
 import { parseCallback } from "./callbacks";
 import type { BotConfig } from "./config";
-import {
-  bookText,
-  helpText,
-  noResultsText,
-  promptText,
-  resultsText,
-  welcomeText,
-} from "./format";
+import { bookText, helpText, noResultsText, promptText, resultsText, welcomeText } from "./format";
 import {
   backHomeKeyboard,
   bookKeyboard,
@@ -113,7 +106,10 @@ async function handleCallback(ctx: BotContext, cq: TelegramCallbackQuery) {
         if (!books.length) {
           await show("No featured books right now.", backHomeKeyboard());
         } else {
-          await show("⭐ <b>Featured books</b>\n\nPick one to see details.", featuredKeyboard(books));
+          await show(
+            "⭐ <b>Featured books</b>\n\nPick one to see details.",
+            featuredKeyboard(books),
+          );
         }
         break;
       }

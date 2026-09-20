@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { getConfig } from "../../bot/config";
 import { handleUpdate } from "../../bot/handlers";
-import { getBookProvider } from "../../bot/providers";
+import { defaultProviderName, getBookProvider } from "../../bot/providers";
+import { getZLibraryProviderInstance } from "../../bot/providers/zlibrary";
 import { TelegramClient, type TelegramUpdate } from "../../bot/telegram";
 
 /** Constant-time string compare (no node:crypto dependency). */
@@ -17,13 +18,18 @@ export const Route = createFileRoute("/api/webhook")({
   server: {
     handlers: {
       GET: async () => {
-        // Secret values are never returned — only whether they are configured.
+        // Secret values are NEVER returned — only sanitized status, presence flags, and endpoint connectivity.
+        const providerName = process.env["BOOK_PROVIDER"] ?? defaultProviderName();
+        const zlibDiagnostics =
+          providerName === "zlibrary" ? getZLibraryProviderInstance().getDiagnostics() : undefined;
+
         return Response.json({
           ok: true,
           status: "webhook active",
           botTokenConfigured: Boolean(process.env["TELEGRAM_BOT_TOKEN"]),
           webhookSecretConfigured: Boolean(process.env["TELEGRAM_WEBHOOK_SECRET"]),
-          provider: process.env["BOOK_PROVIDER"] ?? "mock",
+          provider: providerName,
+          diagnostics: zlibDiagnostics,
         });
       },
       POST: async ({ request }) => {

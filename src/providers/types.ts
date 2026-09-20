@@ -30,4 +30,3 @@ export interface BookProvider {
   getBookDetails(id: string): Promise<Book | null>;
   getFeatured(): Promise<Book[]>;
 }
-

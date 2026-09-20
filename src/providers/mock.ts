@@ -10,7 +10,8 @@ const MOCK_BOOKS: Book[] = [
     size: "14.2 MB",
     description:
       "The big ideas behind reliable, scalable, and maintainable systems. A deep dive into data storage, replication, partitioning, transactions, and distributed systems.",
-    sourceUrl: "https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/",
+    sourceUrl:
+      "https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/",
   },
   {
     id: "mock-2",
@@ -21,7 +22,8 @@ const MOCK_BOOKS: Book[] = [
     size: "6.8 MB",
     description:
       "Even bad code can function. But if code isn't clean, it can bring a development organization to its knees. Learn meaningful naming, small functions, and unit testing.",
-    sourceUrl: "https://www.pearson.com/en-us/subject-catalog/p/clean-code-a-handbook-of-agile-software-craftsmanship/P200000000109",
+    sourceUrl:
+      "https://www.pearson.com/en-us/subject-catalog/p/clean-code-a-handbook-of-agile-software-craftsmanship/P200000000109",
   },
   {
     id: "mock-3",
@@ -32,7 +34,8 @@ const MOCK_BOOKS: Book[] = [
     size: "8.5 MB",
     description:
       "20th Anniversary Edition. Pragmatic philosophy, career growth, code architecture, testing, and keeping your technical debt under control.",
-    sourceUrl: "https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/",
+    sourceUrl:
+      "https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/",
   },
   {
     id: "mock-4",
@@ -98,7 +101,8 @@ const MOCK_BOOKS: Book[] = [
     size: "9.1 MB",
     description:
       "The classic MIT textbook on computing, functional programming, recursion, abstraction, and the mechanics of interpretation.",
-    sourceUrl: "https://mitpress.mit.edu/9780262510875/structure-and-interpretation-of-computer-programs/",
+    sourceUrl:
+      "https://mitpress.mit.edu/9780262510875/structure-and-interpretation-of-computer-programs/",
   },
   {
     id: "mock-10",
@@ -126,7 +130,7 @@ export class MockBookProvider implements BookProvider {
           (b) =>
             b.title.toLowerCase().includes(rawQuery) ||
             b.author.toLowerCase().includes(rawQuery) ||
-            (b.description && b.description.toLowerCase().includes(rawQuery))
+            (b.description && b.description.toLowerCase().includes(rawQuery)),
         )
       : MOCK_BOOKS;
 

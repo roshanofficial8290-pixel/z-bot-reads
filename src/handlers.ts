@@ -58,15 +58,12 @@ export interface EditMessageTextPayload {
 }
 
 function escapeHtml(text: string): string {
-  return (text || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
+  return (text || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
 export async function sendTelegramRequest(
   method: string,
-  payload: Record<string, unknown>
+  payload: Record<string, unknown>,
 ): Promise<{ ok: boolean; description?: string; result?: unknown }> {
   const token = process.env["TELEGRAM_BOT_TOKEN"];
   if (!token) {
@@ -84,7 +81,10 @@ export async function sendTelegramRequest(
 
     const data = (await res.json()) as { ok: boolean; description?: string; result?: unknown };
     if (!res.ok || !data.ok) {
-      console.error(`[Telegram API error] ${method} returned ${res.status}:`, data.description || data);
+      console.error(
+        `[Telegram API error] ${method} returned ${res.status}:`,
+        data.description || data,
+      );
     }
     return data;
   } catch (err) {
@@ -285,9 +285,7 @@ function renderWelcomeMessage(name?: string) {
           { text: "🔍 Search Books", callback_data: "cmd:search_prompt" },
           { text: "🌟 Featured Books", callback_data: "cmd:featured" },
         ],
-        [
-          { text: "ℹ️ Help & Guide", callback_data: "cmd:help" },
-        ],
+        [{ text: "ℹ️ Help & Guide", callback_data: "cmd:help" }],
       ],
     },
   };
@@ -302,9 +300,7 @@ function renderHelpMessage() {
           { text: "🔍 Start Searching", callback_data: "cmd:search_prompt" },
           { text: "🌟 Featured", callback_data: "cmd:featured" },
         ],
-        [
-          { text: "🏠 Main Menu", callback_data: "cmd:start" },
-        ],
+        [{ text: "🏠 Main Menu", callback_data: "cmd:start" }],
       ],
     },
   };
@@ -338,7 +334,7 @@ function renderFeaturedList(books: Book[]) {
 
 function renderSearchResults(
   query: string,
-  result: { books: Book[]; total: number; page: number; totalPages: number }
+  result: { books: Book[]; total: number; page: number; totalPages: number },
 ) {
   if (result.books.length === 0) {
     return {

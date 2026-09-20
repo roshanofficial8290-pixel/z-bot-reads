@@ -52,7 +52,11 @@ export function parseCallback(data: string | undefined): Callback | null {
   const parts = data.split(SEP);
   if (parts[0] === "s" && parts.length >= 3) {
     const page = Number(parts[1]);
-    return { kind: "search", page: Number.isFinite(page) ? page : 1, query: parts.slice(2).join(SEP) };
+    return {
+      kind: "search",
+      page: Number.isFinite(page) ? page : 1,
+      query: parts.slice(2).join(SEP),
+    };
   }
   if (parts[0] === "b" && parts.length >= 4) {
     const page = Number(parts[2]);

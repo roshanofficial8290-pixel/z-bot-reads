@@ -6,11 +6,17 @@ export type { Book, BookProvider, BookSource, SearchResult } from "./types";
 
 let cached: BookProvider | undefined;
 
-/** Real Z-Library is used automatically once credentials are configured. */
-function defaultProviderName(): string {
+/** Real Z-Library is used automatically once credentials or tokens are configured. */
+export function defaultProviderName(): string {
   const explicit = process.env["BOOK_PROVIDER"];
   if (explicit) return explicit;
-  return process.env["ZLIBRARY_EMAIL"] && process.env["ZLIBRARY_PASSWORD"] ? "zlibrary" : "mock";
+  const hasCreds = Boolean(process.env["ZLIBRARY_EMAIL"] && process.env["ZLIBRARY_PASSWORD"]);
+  const hasTokens = Boolean(
+    process.env["ZLIBRARY_COOKIE"] ||
+    (process.env["ZLIBRARY_REMIX_USERKEY"] &&
+      (process.env["ZLIBRARY_REMIX_USERID"] || process.env["ZLIBRARY_USERID"])),
+  );
+  return hasCreds || hasTokens ? "zlibrary" : "mock";
 }
 
 export function getBookProvider(name = defaultProviderName()): BookProvider {
